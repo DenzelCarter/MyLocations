@@ -14,6 +14,8 @@
 		06D9C1351B01A86300A57F45 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06D9C1341B01A86300A57F45 /* Images.xcassets */; };
 		06D9C1381B01A86300A57F45 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06D9C1361B01A86300A57F45 /* LaunchScreen.xib */; };
 		06D9C1441B01A86300A57F45 /* MyLocationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D9C1431B01A86300A57F45 /* MyLocationsTests.swift */; };
+		06F9570E1B0985F100167FDB /* LocationDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06F9570D1B0985F100167FDB /* LocationDetailsViewController.swift */; };
+		06F957101B0AA03600167FDB /* CategoryPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06F9570F1B0AA03600167FDB /* CategoryPickerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +40,8 @@
 		06D9C13D1B01A86300A57F45 /* MyLocationsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyLocationsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		06D9C1421B01A86300A57F45 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		06D9C1431B01A86300A57F45 /* MyLocationsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLocationsTests.swift; sourceTree = "<group>"; };
+		06F9570D1B0985F100167FDB /* LocationDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationDetailsViewController.swift; sourceTree = "<group>"; };
+		06F9570F1B0AA03600167FDB /* CategoryPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryPickerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +84,8 @@
 			isa = PBXGroup;
 			children = (
 				06D9C12B1B01A86300A57F45 /* AppDelegate.swift */,
+				06F9570D1B0985F100167FDB /* LocationDetailsViewController.swift */,
+				06F9570F1B0AA03600167FDB /* CategoryPickerViewController.swift */,
 				06D9C12D1B01A86300A57F45 /* CurrentLocationViewController.swift */,
 				06D9C12F1B01A86300A57F45 /* SecondViewController.swift */,
 				06D9C1311B01A86300A57F45 /* Main.storyboard */,
@@ -215,8 +221,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06F9570E1B0985F100167FDB /* LocationDetailsViewController.swift in Sources */,
 				06D9C1301B01A86300A57F45 /* SecondViewController.swift in Sources */,
 				06D9C12C1B01A86300A57F45 /* AppDelegate.swift in Sources */,
+				06F957101B0AA03600167FDB /* CategoryPickerViewController.swift in Sources */,
 				06D9C12E1B01A86300A57F45 /* CurrentLocationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -413,6 +421,7 @@
 				06D9C1491B01A86300A57F45 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		06D9C14A1B01A86300A57F45 /* Build configuration list for PBXNativeTarget "MyLocationsTests" */ = {
 			isa = XCConfigurationList;
@@ -421,6 +430,7 @@
 				06D9C14C1B01A86300A57F45 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
