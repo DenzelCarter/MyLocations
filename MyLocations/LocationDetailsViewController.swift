@@ -9,19 +9,23 @@
 import UIKit
 import CoreLocation
 import Dispatch
+import CoreData
+
+private let dateFormatter: NSDateFormatter = {
+    let formatter = NSDateFormatter()
+    formatter.dateStyle = .MediumStyle
+    formatter.timeStyle = .ShortStyle
+    return formatter
+    }()
 
 class LocationDetailsViewController: UITableViewController, UITextViewDelegate {
-    private let dateFormatter: NSDateFormatter = {
-        let formatter = NSDateFormatter()
-        formatter.dateStyle = .MediumStyle
-        formatter.timeStyle = .ShortStyle
-        return formatter
-        }()
     
+    var date = NSDate()
     var descriptionText = ""
     var coordinate = CLLocationCoordinate2D(latitude: 0, longitude: 0)
     var placemark: CLPlacemark?
     var categoryName = "No Category"
+    var managedObjectContext: NSManagedObjectContext!
     
     @IBOutlet var descriptionTextView: UITextView!
     @IBOutlet var categoryLabel: UILabel!
@@ -34,10 +38,30 @@ class LocationDetailsViewController: UITableViewController, UITextViewDelegate {
         let hudView = HudView.hudInView(navigationController!.view,
             animated: true)
         hudView.text = "Tagged"
+        // 1
+        let location = NSEntityDescription.insertNewObjectForEntityForName(
+            "Location", inManagedObjectContext: managedObjectContext)
+            as! Location
+        // 2
+        location.locationDescription = descriptionText
+        location.category = categoryName
+        location.latitude = coordinate.latitude
+        location.longitude = coordinate.longitude
+        location.date = date
+        location.placemark = placemark
+        // 3
+        var error: NSError?
+        if !managedObjectContext.save(&error) {
+            fatalCoreDataError(error)
+            return
+        }
         afterDelay(0.6) {
             self.dismissViewControllerAnimated(true, completion: nil)
         }
+        
     }
+    
+    
     @IBAction func cancel() {
         dismissViewControllerAnimated(true, completion: nil)
     }
@@ -60,7 +84,7 @@ class LocationDetailsViewController: UITableViewController, UITextViewDelegate {
         } else {
             addressLabel.text = "No Address Found"
         }
-        dateLabel.text = formatDate(NSDate())
+        dateLabel.text = formatDate(date)
         let gestureRecognizer = UITapGestureRecognizer(target: self,
             action: Selector("hideKeyboard:"))
         gestureRecognizer.cancelsTouchesInView = false
