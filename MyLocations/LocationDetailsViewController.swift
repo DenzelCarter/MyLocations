@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreLocation
+import Dispatch
 
 class LocationDetailsViewController: UITableViewController, UITextViewDelegate {
     private let dateFormatter: NSDateFormatter = {
@@ -30,8 +31,12 @@ class LocationDetailsViewController: UITableViewController, UITextViewDelegate {
     @IBOutlet var dateLabel: UILabel!
     
     @IBAction func done() {
-       println("Description '\(descriptionText)'")
-       dismissViewControllerAnimated(true, completion: nil)
+        let hudView = HudView.hudInView(navigationController!.view,
+            animated: true)
+        hudView.text = "Tagged"
+        afterDelay(0.6) {
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
     }
     @IBAction func cancel() {
         dismissViewControllerAnimated(true, completion: nil)
@@ -56,7 +61,28 @@ class LocationDetailsViewController: UITableViewController, UITextViewDelegate {
             addressLabel.text = "No Address Found"
         }
         dateLabel.text = formatDate(NSDate())
+        let gestureRecognizer = UITapGestureRecognizer(target: self,
+            action: Selector("hideKeyboard:"))
+        gestureRecognizer.cancelsTouchesInView = false
+        tableView.addGestureRecognizer(gestureRecognizer)
     }
+    
+    override func tableView(tableView: UITableView,
+        willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+            if indexPath.section == 0 || indexPath.section == 1 {
+                return indexPath
+            } else {
+                return nil
+            }
+    }
+    
+    override func tableView(tableView: UITableView,
+        didSelectRowAtIndexPath indexPath: NSIndexPath) {
+            if indexPath.section == 0 && indexPath.row == 0 {
+                descriptionTextView.becomeFirstResponder()
+            }
+    }
+
     
     override func prepareForSegue(segue: UIStoryboardSegue,
         sender: AnyObject?) {
@@ -84,6 +110,11 @@ class LocationDetailsViewController: UITableViewController, UITextViewDelegate {
             }
     }
     
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        descriptionTextView.frame.size.width = view.frame.size.width - 30
+    }
+    
     func formatDate(date: NSDate) -> String {
         return dateFormatter.stringFromDate(date)
     }
@@ -94,6 +125,16 @@ class LocationDetailsViewController: UITableViewController, UITextViewDelegate {
                 "\(placemark.locality), " +
                 "\(placemark.administrativeArea) \(placemark.postalCode)," +
         "\(placemark.country)"
+    }
+    
+    func hideKeyboard(gestureRecognizer: UIGestureRecognizer) {
+        let point = gestureRecognizer.locationInView(tableView)
+        let indexPath = tableView.indexPathForRowAtPoint(point)
+        if indexPath != nil && indexPath!.section == 0
+            && indexPath!.row == 0 {
+                return
+        }
+        descriptionTextView.resignFirstResponder()
     }
     
 }

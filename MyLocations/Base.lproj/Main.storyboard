@@ -104,7 +104,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Nho-rj-N6s" id="tdH-Qf-gs1">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="(Description Goes Here)" translatesAutoresizingMaskIntoConstraints="NO" id="bQh-4u-BhE">
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" keyboardDismissMode="onDrag" text="(Description Goes Here)" translatesAutoresizingMaskIntoConstraints="NO" id="bQh-4u-BhE">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="111"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="21"/>
