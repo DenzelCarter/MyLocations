@@ -9,10 +9,8 @@
 import UIKit
 
 class LocationCell: UITableViewCell {
-    
-    @IBOutlet var descriptionLabel: UILabel!
-    
-    @IBOutlet var addressLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var addressLabel: UILabel!
     
     func configureForLocation(location: Location) {
         if location.locationDescription.isEmpty {
@@ -20,15 +18,13 @@ class LocationCell: UITableViewCell {
         } else {
             descriptionLabel.text = location.locationDescription
         }
+        
         if let placemark = location.placemark {
             addressLabel.text =
                 "\(placemark.subThoroughfare) \(placemark.thoroughfare)," +
             "\(placemark.locality)"
         } else {
-            addressLabel.text = String(format:
-                "Lat: %.8f, Long: %.8f", location.latitude, location.longitude)
+            addressLabel.text = String(format:"Lat: %.8f, Long: %.8f", location.latitude, location.longitude)
         }
     }
-   
-    
 }

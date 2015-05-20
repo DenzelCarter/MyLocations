@@ -11,6 +11,9 @@ import CoreData
 import CoreLocation
 
 class LocationsViewController: UITableViewController {
+    
+    var managedObjectContext: NSManagedObjectContext!
+    
     lazy var fetchedResultsController: NSFetchedResultsController = {
         let fetchRequest = NSFetchRequest()
         
@@ -33,65 +36,21 @@ class LocationsViewController: UITableViewController {
         return fetchedResultsController
         }()
     
-    var managedObjectContext: NSManagedObjectContext!
-
+    deinit {
+        fetchedResultsController.delegate = nil
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.rightBarButtonItem = editButtonItem()
         performFetch()
     }
+    
     func performFetch() {
         var error: NSError?
         if !fetchedResultsController.performFetch(&error) {
             fatalCoreDataError(error)
         }
-    }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    override func tableView(tableView: UITableView,
-        numberOfRowsInSection section: Int) -> Int {
-            let sectionInfo = fetchedResultsController.sections![section]
-                as! NSFetchedResultsSectionInfo
-            return sectionInfo.numberOfObjects
-    }
-    
-    override func tableView(tableView: UITableView,
-        cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-            let cell = tableView.dequeueReusableCellWithIdentifier("LocationCell")
-                as! LocationCell
-            let location = fetchedResultsController.objectAtIndexPath(indexPath)
-                as! Location
-            
-            cell.configureForLocation(location)
-            return cell
-    }
-    
-    override func tableView(tableView: UITableView,
-        commitEditingStyle editingStyle: UITableViewCellEditingStyle,
-        forRowAtIndexPath indexPath: NSIndexPath) {
-            if editingStyle == .Delete {
-                let location = fetchedResultsController.objectAtIndexPath(indexPath)
-                    as! Location
-                managedObjectContext.deleteObject(location)
-                var error: NSError?
-                if !managedObjectContext.save(&error) {
-                    fatalCoreDataError(error)
-                }
-            }
-    }
-    
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return fetchedResultsController.sections!.count
-    }
-    
-    override func tableView(tableView: UITableView,
-        titleForHeaderInSection section: Int) -> String? {
-            let sectionInfo = fetchedResultsController.sections![section]
-                as! NSFetchedResultsSectionInfo
-            return sectionInfo.name
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -106,7 +65,45 @@ class LocationsViewController: UITableViewController {
             }
         }
     }
+    
+    // MARK: - UITableViewDataSource
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let sectionInfo = fetchedResultsController.sections![section] as! NSFetchedResultsSectionInfo
+        return sectionInfo.numberOfObjects
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("LocationCell") as! LocationCell
+        
+        let location = fetchedResultsController.objectAtIndexPath(indexPath) as! Location
+        cell.configureForLocation(location)
+        
+        return cell
+    }
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle,forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            let location = fetchedResultsController.objectAtIndexPath(indexPath) as! Location
+            managedObjectContext.deleteObject(location)
+            
+            var error: NSError?
+            if !managedObjectContext.save(&error) {
+                fatalCoreDataError(error)
+            }
+        }
+    }
+    
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return fetchedResultsController.sections!.count
+    }
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let sectionInfo = fetchedResultsController.sections![section] as! NSFetchedResultsSectionInfo
+        return sectionInfo.name
+    }
 }
+
 extension LocationsViewController: NSFetchedResultsControllerDelegate {
     
     func controllerWillChangeContent(controller: NSFetchedResultsController) {
