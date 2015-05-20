@@ -97,7 +97,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LocationCell" rowHeight="93" id="BwA-SM-kwl">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LocationCell" rowHeight="93" id="BwA-SM-kwl" customClass="LocationCell" customModule="MyLocations" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BwA-SM-kwl" id="Eyr-YP-eqK">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -116,6 +116,11 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="addressLabel" destination="yTL-cI-TDv" id="EiW-Cz-beu"/>
+                                    <outlet property="descriptionLabel" destination="W8f-Ko-Lmm" id="kfh-Vs-mBa"/>
+                                    <segue destination="w89-vq-AyP" kind="presentation" identifier="EditLocation" id="tVl-3b-7JB"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -422,4 +427,7 @@
     <resources>
         <image name="first" width="30" height="30"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="tVl-3b-7JB"/>
+    </inferredMetricsTieBreakers>
 </document>

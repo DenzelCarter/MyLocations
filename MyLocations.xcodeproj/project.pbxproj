@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0648BC851B0C2152006D5EA5 /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0648BC841B0C2152006D5EA5 /* LocationCell.swift */; };
 		06D9C12C1B01A86300A57F45 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D9C12B1B01A86300A57F45 /* AppDelegate.swift */; };
 		06D9C12E1B01A86300A57F45 /* CurrentLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D9C12D1B01A86300A57F45 /* CurrentLocationViewController.swift */; };
 		06D9C1301B01A86300A57F45 /* LocationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D9C12F1B01A86300A57F45 /* LocationsViewController.swift */; };
@@ -33,6 +34,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0648BC841B0C2152006D5EA5 /* LocationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
 		06D9C1261B01A86300A57F45 /* MyLocations.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyLocations.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		06D9C12A1B01A86300A57F45 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		06D9C12B1B01A86300A57F45 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 			children = (
 				06D9C12B1B01A86300A57F45 /* AppDelegate.swift */,
 				06F9570D1B0985F100167FDB /* LocationDetailsViewController.swift */,
+				0648BC841B0C2152006D5EA5 /* LocationCell.swift */,
 				06F957411B0ABE3200167FDB /* Functions.swift */,
 				06F9573F1B0ABC6200167FDB /* HudView.swift */,
 				06F9570F1B0AA03600167FDB /* CategoryPickerViewController.swift */,
@@ -239,6 +242,7 @@
 				06F957401B0ABC6200167FDB /* HudView.swift in Sources */,
 				06F957471B0BAFC400167FDB /* Location.swift in Sources */,
 				06F957421B0ABE3200167FDB /* Functions.swift in Sources */,
+				0648BC851B0C2152006D5EA5 /* LocationCell.swift in Sources */,
 				06D9C12C1B01A86300A57F45 /* AppDelegate.swift in Sources */,
 				06F957101B0AA03600167FDB /* CategoryPickerViewController.swift in Sources */,
 				06D9C12E1B01A86300A57F45 /* CurrentLocationViewController.swift in Sources */,

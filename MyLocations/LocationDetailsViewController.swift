@@ -26,6 +26,18 @@ class LocationDetailsViewController: UITableViewController, UITextViewDelegate {
     var placemark: CLPlacemark?
     var categoryName = "No Category"
     var managedObjectContext: NSManagedObjectContext!
+    var locationToEdit: Location? {
+        didSet {
+            if let location = locationToEdit {
+                descriptionText = location.locationDescription
+                categoryName = location.category
+                date = location.date
+                coordinate = CLLocationCoordinate2DMake(
+                    location.latitude, location.longitude)
+                placemark = location.placemark
+            }
+        }
+    }
     
     @IBOutlet var descriptionTextView: UITextView!
     @IBOutlet var categoryLabel: UILabel!
@@ -37,12 +49,16 @@ class LocationDetailsViewController: UITableViewController, UITextViewDelegate {
     @IBAction func done() {
         let hudView = HudView.hudInView(navigationController!.view,
             animated: true)
-        hudView.text = "Tagged"
-        // 1
-        let location = NSEntityDescription.insertNewObjectForEntityForName(
-            "Location", inManagedObjectContext: managedObjectContext)
-            as! Location
-        // 2
+        var location: Location
+        if let temp = locationToEdit {
+            hudView.text = "Updated"
+            location = temp
+        } else {
+            hudView.text = "Tagged"
+            location = NSEntityDescription.insertNewObjectForEntityForName(
+                "Location", inManagedObjectContext: managedObjectContext)
+                as! Location
+        }
         location.locationDescription = descriptionText
         location.category = categoryName
         location.latitude = coordinate.latitude
@@ -79,6 +95,9 @@ class LocationDetailsViewController: UITableViewController, UITextViewDelegate {
         categoryLabel.text = categoryName
         latitudeLabel.text = String(format: "%.8f", coordinate.latitude)
         longitudeLabel.text = String(format: "%.8f", coordinate.longitude)
+        if let location = locationToEdit {
+            title = "Edit Location"
+        }
         if let placemark = placemark {
             addressLabel.text = stringFromPlacemark(placemark)
         } else {
