@@ -1,11 +1,3 @@
-//
-//  SecondViewController.swift
-//  MyLocations
-//
-//  Created by Denzel Carter on 5/11/15.
-//  Copyright (c) 2015 BearBrosDevelopment. All rights reserved.
-//
-
 import UIKit
 import CoreData
 import CoreLocation
@@ -85,6 +77,7 @@ class LocationsViewController: UITableViewController {
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle,forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             let location = fetchedResultsController.objectAtIndexPath(indexPath) as! Location
+            location.removePhotoFile()
             managedObjectContext.deleteObject(location)
             
             var error: NSError?
@@ -158,3 +151,4 @@ extension LocationsViewController: NSFetchedResultsControllerDelegate {
         tableView.endUpdates()
     }
 }
+
