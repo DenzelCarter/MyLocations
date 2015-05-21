@@ -11,8 +11,7 @@ import UIKit
 class LocationCell: UITableViewCell {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
-    @IBOutlet var photoImageView: UIImageView!
-    
+    @IBOutlet weak var photoImageView: UIImageView!
     
     func configureForLocation(location: Location) {
         if location.locationDescription.isEmpty {

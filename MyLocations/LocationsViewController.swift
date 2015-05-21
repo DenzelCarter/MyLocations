@@ -151,4 +151,3 @@ extension LocationsViewController: NSFetchedResultsControllerDelegate {
         tableView.endUpdates()
     }
 }
-
