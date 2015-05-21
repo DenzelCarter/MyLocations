@@ -67,6 +67,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             // Workaround for Core Data crash on cached data.
             let forceTheViewToLoad = locationsViewController.view
+            
+            let mapViewController = tabBarViewControllers[2] as! MapViewController
+            mapViewController.managedObjectContext = managedObjectContext
         }
         
         listenForFatalCoreDataNotifications()
